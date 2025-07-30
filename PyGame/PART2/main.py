@@ -1,4 +1,3 @@
-import os
 import pygame
 from constants import WIDTH, HEIGHT, running #thought would be cleaner than importing everything
 import player
