@@ -1,6 +1,7 @@
 import pygame
 import os
 import constants as c
+import bullet as b
 class Player(pygame.sprite.Sprite): 
     def __init__(self, char_type, x, y, scale, speed):
         
@@ -18,10 +19,9 @@ class Player(pygame.sprite.Sprite):
         self.inAir = True
         self.scale = scale
         self.char_type = char_type
-        self.RIGHT = 1
-        self.LEFT = 1
         self.speed = speed
-        self.direction = self.RIGHT
+        self.shotCooldown = 0
+        self.direction = 1
         self.jump = False
         self.flip = False
         self.animationList = []
@@ -53,12 +53,12 @@ class Player(pygame.sprite.Sprite):
         if self.movingLeft:
             dx = -self.speed
             self.flip = True
-            self.direction = self.LEFT
+            self.direction = -1
         
         if self.movingRight:
             dx = self.speed
             self.flip = False
-            self.direction = self.RIGHT
+            self.direction = 1
         
         if self.jump and self.inAir == False:
             self.velY = -11
@@ -129,7 +129,7 @@ class Player(pygame.sprite.Sprite):
             self.rect.right = screen_width
 
 
-    def update(self):
+    def updateAnimation(self):
         #update animation
         cooldown = 75
         self.image = self.animationList[self.action][self.frameIndex]
@@ -145,3 +145,16 @@ class Player(pygame.sprite.Sprite):
             self.action = newAction
             self.frameIndex = 0
             self.updateTime = pygame.time.get_ticks()
+            
+    def shoot(self):
+        if self.shotCooldown <= 0:
+            self.shotCooldown = 20 # Cooldown time in frames ( 1/3 of second )
+            bullet = b.Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
+            b.bulletGroup.add(bullet)
+    
+    def update(self):
+        self.updateAnimation()
+        #update cooldown
+        if self.shotCooldown > 0:
+            self.shotCooldown -= 1
+        

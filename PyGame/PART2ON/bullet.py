@@ -1,5 +1,4 @@
 import pygame
-import os
 import constants as c
 
 class Bullet(pygame.sprite.Sprite):
@@ -11,14 +10,12 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.direction = direction
 
-    """def update(self):
-        if self.direction == 'left':
-            self.rect.x -= self.speed
-        elif self.direction == 'right':
-            self.rect.x += self.speed
+    def update(self):
+        self.rect.x += (self.speed * self.direction)
         
         # Remove bullet if it goes off screen
         if self.rect.right < 0 or self.rect.left > c.WIDTH:
-            self.kill()"""
-            
+            self.kill()
+
+#create a group for bullets            
 bulletGroup = pygame.sprite.Group()

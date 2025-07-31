@@ -23,8 +23,7 @@ def main_loop(player, enemy, screen):
     
     if player.alive:
         if c.shoot:
-            bullet = b.Bullet(player.rect.centerx, player.rect.centery, 'right' if player.flip else 'left')
-            b.bulletGroup.add(bullet)
+            player.shoot()
         if player.inAir:
             player.updateAction(2)
         elif player.movingLeft or player.movingRight:
