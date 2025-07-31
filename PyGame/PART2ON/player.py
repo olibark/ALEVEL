@@ -20,12 +20,18 @@ class Player(pygame.sprite.Sprite):
         self.speed = speed
         self.direction = self.RIGHT
         self.flip = False
-        
-        img = pygame.image.load(os.path.join(BASE, 'img', (f'{self.char_type}'), 'Idle', '0.png'))
-        self.image = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
+        self.animationList = []
+        self.index = 0
+        self.updateTime = pygame.time.get_ticks()
+        #self.image = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
+        for i in range(5):
+            img = pygame.image.load(os.path.join(BASE, 'img', (f'{self.char_type}'), 'Idle', f'{i}.png'))
+            img = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
+            self.animationList.append(img)
+        self.image = self.animationList[self.index]
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
-    
+        
     def move(self, screen):
         
         dx = 0
@@ -63,3 +69,14 @@ class Player(pygame.sprite.Sprite):
         self.scale = scale
         self.rect = self.image.get_rect()
         self.rect.center = old_center
+        # Clamp the new rect to screen bounds
+        screen_width = 800  # or use a passed-in value if you prefer
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.right > screen_width:
+            self.rect.right = screen_width
+
+    def update(self):
+        #update animation
+        cooldown = 100
+        

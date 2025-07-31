@@ -7,7 +7,7 @@ import loop
 
 clock = pygame.time.Clock()
 screen = init.Init()
-init.drawBG(screen, init.BACKFROUND)
+init.drawBG(screen, init.BACKGROUND)
 
 player = pl.Player('player', 200, 200, 5, 5)
 enemy = pl.Player('enemy', 400, 200, 5, 5)
@@ -15,6 +15,6 @@ enemy = pl.Player('enemy', 400, 200, 5, 5)
 while CONST.running:
     
     clock.tick(FPS)  # set FPS
-    loop.main_loop(player, enemy, screen, CONST.running) #main loopaa
+    loop.main_loop(player, enemy, screen) #main loopaa
 
 pygame.quit()

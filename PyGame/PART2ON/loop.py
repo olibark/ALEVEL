@@ -3,17 +3,17 @@ import player as pl
 import init
 import constants as c
 
-def main_loop(player, enemy, screen, running):
+def main_loop(player, enemy, screen):
     
-    init.drawBG(screen, init.BACKFROUND)  # draw background
+    init.drawBG(screen, init.BACKGROUND)  # draw background
     if player.scale > enemy.scale:
-        pl.Player.draw(enemy, screen)
-        pl.Player.draw(player, screen)
+        enemy.draw(screen)
+        player.draw(screen)
     else:
-        pl.Player.draw(player, screen)
-        pl.Player.draw(enemy, screen)
+        player.draw(screen)
+        enemy.draw(screen)
+
     player.move(screen)
-    
     
     for event in pygame.event.get():
         
@@ -32,7 +32,6 @@ def main_loop(player, enemy, screen, running):
                     player.setScale(3)
                 else:
                     player.setScale(5)
-
             if event.key == pygame.K_LCTRL:
                 if player.scale == 5:
                     player.setScale(7)
