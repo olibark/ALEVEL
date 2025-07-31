@@ -2,6 +2,7 @@ import pygame
 import player as pl
 import init
 import constants as c
+import bullet as b
 
 def main_loop(player, enemy, screen):
     
@@ -16,7 +17,14 @@ def main_loop(player, enemy, screen):
     
     player.update()
     
+    #update and draw groups
+    b.bulletGroup.update()
+    b.bulletGroup.draw(screen)
+    
     if player.alive:
+        if c.shoot:
+            bullet = b.Bullet(player.rect.centerx, player.rect.centery, 'right' if player.flip else 'left')
+            
         if player.inAir:
             player.updateAction(2)
         elif player.movingLeft or player.movingRight:
@@ -37,6 +45,8 @@ def main_loop(player, enemy, screen):
                 player.movingLeft = True
             if event.key == pygame.K_d:
                 player.movingRight = True
+            if event.key == pygame.K_j:
+                c.shoot = True
             if event.key == pygame.K_LSHIFT:
                 if player.scale == 5:
                     player.setScale(3)

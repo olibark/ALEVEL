@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
             #count num of frames in each animation
             frames = len(os.listdir(os.path.join(BASE, 'img', self.char_type, animation)))
             for i in range(frames):
-                img = pygame.image.load(os.path.join(BASE, 'img', (f'{self.char_type}'), (f'{animation}'), f'{i}.png'))
+                img = pygame.image.load(os.path.join(BASE, 'img', (f'{self.char_type}'), (f'{animation}'), f'{i}.png')).convert_alpha()
                 img = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
                 tempList.append(img)
             self.animationList.append(tempList)
