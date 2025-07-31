@@ -6,15 +6,25 @@ import constants as c
 def main_loop(player, enemy, screen):
     
     init.drawBG(screen, init.BACKGROUND)  # draw background
+    
     if player.scale > enemy.scale:
         enemy.draw(screen)
         player.draw(screen)
     else:
         player.draw(screen)
         enemy.draw(screen)
-
-    player.move(screen)
     
+    player.update()
+    
+    if player.alive:
+        if player.inAir:
+            player.updateAction(2)
+        elif player.movingLeft or player.movingRight:
+            player.updateAction(player.RUNNING)#1 = running
+        else: 
+            player.updateAction(player.IDLE)#0 = idle
+        player.move(screen)
+        
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT: 
@@ -37,7 +47,9 @@ def main_loop(player, enemy, screen):
                     player.setScale(7)
                 else:
                     player.setScale(5)
-
+            if event.key == pygame.K_SPACE and player.alive:
+                if not player.jump:
+                    player.jump = True
                 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
@@ -46,6 +58,7 @@ def main_loop(player, enemy, screen):
                 player.movingRight = False
             """if event.key == pygame.K_LSHIFT or event.key == pygame.K_LCTRL:
                 player.setScale(5)"""
+    
     pygame.display.flip()  #update the display
                 
             

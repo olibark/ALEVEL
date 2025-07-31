@@ -1,9 +1,7 @@
-import pygame
+import pygame, init, loop
 from constants import FPS
 import constants as CONST #thought would be cleaner than importing everything
 import player as pl
-import init
-import loop
 
 clock = pygame.time.Clock()
 screen = init.Init()

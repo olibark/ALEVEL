@@ -4,3 +4,4 @@ FPS = 60
 running = True
 movingLeft = False
 movingRight = False
+GRAVITY = 0.75
