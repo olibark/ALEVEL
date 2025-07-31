@@ -1,15 +1,20 @@
 import pygame
-from constants import WIDTH, HEIGHT, running #thought would be cleaner than importing everything
-import player
+from constants import running, movingLeft, movingRight, FPS #thought would be cleaner than importing everything
+import player as pl
 import init
+import loop
 
+clock = pygame.time.Clock()
 screen = init.Init()
-player1 = player.Player(200, 200, 5)
+init.drawBG(screen, init.BACKFROUND)
+
+player = pl.Player('player', 200, 200, 5, 5)
+enemy = pl.Player('enemy', 400, 200, 5, 5)
 
 while running:
-    player.Player.draw(player1, screen)
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: 
-            running = False
-    pygame.display.flip()  #update the display
+    
+    clock.tick(FPS)  # set FPS
+
+    loop.main_loop(player, enemy, screen, running) #main loopaa
+
 pygame.quit()

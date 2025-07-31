@@ -2,6 +2,8 @@ import pygame
 import os
 import constants
 
+BACKFROUND = (144, 201, 120)
+
 def Init():
     pygame.init()
     os.system('cls' if os.name == 'nt' else 'clear')  # Clear terminal depending on OS
@@ -9,3 +11,6 @@ def Init():
     pygame.display.set_caption("Game Window")
     print(f"Game initialized with dimensions: {constants.WIDTH}x{constants.HEIGHT}")
     return screen
+
+def drawBG(screen, BACKGROUND):
+    screen.fill(BACKGROUND)
