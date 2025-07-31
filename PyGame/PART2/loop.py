@@ -1,7 +1,7 @@
 import pygame
 import player as pl
 import init
-import constants
+import constants as c
 
 def main_loop(player, enemy, screen, running):
     
@@ -18,27 +18,35 @@ def main_loop(player, enemy, screen, running):
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT: 
-            running = False
+            c.running = False
         if event.type == pygame.KEYDOWN:
             
             if event.key == pygame.K_ESCAPE:
-                running = False
+                c.running = False
             if event.key == pygame.K_a:
                 player.movingLeft = True
             if event.key == pygame.K_d:
                 player.movingRight = True
             if event.key == pygame.K_LSHIFT:
-                player.setScale(3)  # Scale down the player
+                if player.scale == 5:
+                    player.setScale(3)
+                else:
+                    player.setScale(5)
+
             if event.key == pygame.K_LCTRL:
-                player.setScale(7)  # Scale up the player
+                if player.scale == 5:
+                    player.setScale(7)
+                else:
+                    player.setScale(5)
+
                 
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_a:
                 player.movingLeft = False
             if event.key == pygame.K_d:
                 player.movingRight = False
-            if event.key == pygame.K_LSHIFT or event.key == pygame.K_LCTRL:
-                player.setScale(5)
+            """if event.key == pygame.K_LSHIFT or event.key == pygame.K_LCTRL:
+                player.setScale(5)"""
     pygame.display.flip()  #update the display
                 
             

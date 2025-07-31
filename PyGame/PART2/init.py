@@ -2,7 +2,7 @@ import pygame
 import os
 import constants
 
-BACKFROUND = (144, 201, 120)
+BACKFROUND = (0, 0, 0)
 
 def Init():
     pygame.init()
