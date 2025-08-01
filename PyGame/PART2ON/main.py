@@ -1,17 +1,14 @@
 import pygame, init, loop
 from constants import FPS
-import constants as CONST #thought would be cleaner than importing everything
-import player as pl
+import constants as CONST
 
-clock = pygame.time.Clock()
-screen = init.Init()
+screen, player, enemy, clock = (init.Init()[0], init.Init()[1],
+                                init.Init()[2], init.Init()[3])
 init.drawBG(screen, init.BACKGROUND)
 
-player = pl.Player('player', 200, 200, 5, 5)
-enemy = pl.Player('enemy', 400, 200, 5, 5)
+
 while CONST.running:
-    
     clock.tick(FPS)  # set FPS
-    loop.main_loop(player, enemy, screen) #main loopaa
+    loop.main_loop(enemy, player, screen) #main loopaa
 
 pygame.quit()

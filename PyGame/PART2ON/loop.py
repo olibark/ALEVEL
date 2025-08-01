@@ -22,7 +22,7 @@ def main_loop(player, enemy, screen):
     b.bulletGroup.draw(screen)
     
     if player.alive:
-        if c.shoot:
+        if c.shooting:
             player.shoot()
         if player.inAir:
             player.updateAction(2)
@@ -45,7 +45,7 @@ def main_loop(player, enemy, screen):
             if event.key == pygame.K_d:
                 player.movingRight = True
             if event.key == pygame.K_j:
-                c.shoot = True
+                c.shooting = True
             if event.key == pygame.K_LSHIFT:
                 if player.scale == 5:
                     player.setScale(3)
@@ -66,7 +66,7 @@ def main_loop(player, enemy, screen):
             if event.key == pygame.K_d:
                 player.movingRight = False
             if event.key == pygame.K_j:
-                c.shoot = False
+                c.shooting = False
             """if event.key == pygame.K_LSHIFT or event.key == pygame.K_LCTRL:
                 player.setScale(5)"""
     
