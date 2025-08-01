@@ -11,4 +11,4 @@ while c.running:
     clock.tick(c.FPS)  # set FPS
     loop.main_loop(enemy, player, screen) #main loopaa
 
-pygame.quit()jjjjjjjjjjj
+pygame.quit()
