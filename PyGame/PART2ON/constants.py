@@ -1,8 +1,8 @@
 import pygame
 import os
 
-WIDTH = 1920
-HEIGHT = 1080
+WIDTH = 800
+HEIGHT = 600
 FPS = 60
 running = True
 movingLeft = False

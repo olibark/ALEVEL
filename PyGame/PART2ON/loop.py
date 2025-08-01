@@ -7,7 +7,7 @@ import bullet as b
 def main_loop(player, enemy, screen):
     
     init.drawBG(screen, init.BACKGROUND)  # draw background
-    
+    #player and enemy draw order
     if player.scale > enemy.scale:
         enemy.draw(screen)
         player.draw(screen)
@@ -16,9 +16,9 @@ def main_loop(player, enemy, screen):
         enemy.draw(screen)
     
     player.update()
-    
+    enemy.update()
     #update and draw groups
-    b.bulletGroup.update()
+    b.bulletGroup.update(player, enemy)
     b.bulletGroup.draw(screen)
     
     if player.alive:

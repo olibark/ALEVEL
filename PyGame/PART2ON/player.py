@@ -4,7 +4,6 @@ import constants as c
 import bullet as b
 class Player(pygame.sprite.Sprite): 
     def __init__(self, char_type, x, y, scale, speed):
-        
         pygame.sprite.Sprite.__init__(self)
         
         BASE = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +20,8 @@ class Player(pygame.sprite.Sprite):
         self.char_type = char_type
         self.speed = speed
         self.shotCooldown = 0
+        self.health = 100
+        self.maxHealth = self.health
         self.direction = 1
         self.jump = False
         self.flip = False
@@ -36,7 +37,9 @@ class Player(pygame.sprite.Sprite):
             #count num of frames in each animation
             frames = len(os.listdir(os.path.join(BASE, 'img', self.char_type, animation)))
             for i in range(frames):
-                img = pygame.image.load(os.path.join(BASE, 'img', (f'{self.char_type}'), (f'{animation}'), f'{i}.png')).convert_alpha()
+                img = pygame.image.load(os.path.join(
+                    BASE, 'img', (f'{self.char_type}'), (f'{animation}'), f'{i}.png')
+                    ).convert_alpha()
                 img = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
                 tempList.append(img)
             self.animationList.append(tempList)
@@ -94,7 +97,7 @@ class Player(pygame.sprite.Sprite):
         self.scale = scale
         self.animationList = []
 
-        animationTypes = ['Idle', 'Run', 'Jump']
+        animationTypes = ['Idle', 'Run', 'Jump', 'Death']
         for action_name in animationTypes:
             tempList = []
             action_path = os.path.join(BASE, 'img', self.char_type, action_name)
@@ -108,7 +111,10 @@ class Player(pygame.sprite.Sprite):
             for i in range(frame_count):
                 img_path = os.path.join(action_path, f'{i}.png')
                 img = pygame.image.load(img_path).convert_alpha()
-                img = pygame.transform.scale(img, (int(img.get_width() * scale), int(img.get_height() * scale)))
+                img = pygame.transform.scale(
+                    img,
+                    (int(img.get_width() * scale),
+                    int(img.get_height() * scale)))
                 tempList.append(img)
 
             self.animationList.append(tempList)
@@ -149,12 +155,23 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
         if self.shotCooldown <= 0:
             self.shotCooldown = 20 # Cooldown time in frames ( 1/3 of second )
-            bullet = b.Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
+            bullet = b.Bullet(
+                self.rect.centerx + (0.6 * self.rect.size[0] * self.direction),
+                self.rect.centery,
+                self.direction, 
+                self)
             b.bulletGroup.add(bullet)
     
     def update(self):
+        self.checkAlive()
         self.updateAnimation()
         #update cooldown
         if self.shotCooldown > 0:
             self.shotCooldown -= 1
-        
+            
+    def checkAlive(self):
+        if self.health <= 0: 
+            self.alive = False
+            self.health = 0
+            self.speed = 0
+            self.updateAction(3) #3 = death
