@@ -1,8 +1,8 @@
 import pygame
 import os
 
-WIDTH = 1000
-HEIGHT = int(WIDTH * 0.75)
+WIDTH = 1920
+HEIGHT = 1080
 FPS = 60
 running = True
 movingLeft = False
