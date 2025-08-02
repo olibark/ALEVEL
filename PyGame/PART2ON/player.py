@@ -31,7 +31,7 @@ class Player(pygame.sprite.Sprite):
         self.updateTime = pygame.time.get_ticks()
         
         #load all images for players
-        animationTypes = ['Idle', 'Run', 'Jump']
+        animationTypes = ['Idle', 'Run', 'Jump', 'Death']
         for animation in animationTypes:
             tempList = []
             #count num of frames in each animation
@@ -136,15 +136,20 @@ class Player(pygame.sprite.Sprite):
 
 
     def updateAnimation(self):
-        #update animation
-        cooldown = 75
+    # Update animation
+        cooldown = 100
         self.image = self.animationList[self.action][self.frameIndex]
         
-        if (pygame.time.get_ticks() - self.updateTime) > cooldown: 
+        if (pygame.time.get_ticks() - self.updateTime) > cooldown:
             self.updateTime = pygame.time.get_ticks()
-            self.frameIndex += 1
-        if self.frameIndex >= len(self.animationList[self.action]):
-            self.frameIndex = 0
+            if self.action == 3:  # 3 = Death
+                if self.frameIndex < len(self.animationList[self.action]) - 1:
+                    self.frameIndex += 1  # Do not loop
+            else:
+                self.frameIndex += 1
+                if self.frameIndex >= len(self.animationList[self.action]):
+                    self.frameIndex = 0
+
             
     def updateAction(self, newAction):
         if newAction != self.action:

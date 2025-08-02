@@ -1,6 +1,4 @@
-import pygame
-import player as pl
-import init
+import pygame, init
 import constants as c
 import bullet as b
 
@@ -8,7 +6,7 @@ def main_loop(player, enemy, screen):
     
     init.drawBG(screen, init.BACKGROUND)  # draw background
     #player and enemy draw order
-    if player.scale > enemy.scale:
+    if player.scale >= enemy.scale:
         enemy.draw(screen)
         player.draw(screen)
     else:
@@ -67,8 +65,6 @@ def main_loop(player, enemy, screen):
                 player.movingRight = False
             if event.key == pygame.K_j:
                 c.shooting = False
-            """if event.key == pygame.K_LSHIFT or event.key == pygame.K_LCTRL:
-                player.setScale(5)"""
     
     pygame.display.flip()  #update the display
                 
