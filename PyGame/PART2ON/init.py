@@ -8,7 +8,7 @@ GREEN = (20, 255, 20)
 def Init():
     pygame.init()
     clock = pygame.time.Clock()
-    os.system('cls' if os.name == 'nt' else 'clear')  # Clear terminal depending on OS
+    os.system(c.CLEAR)  # Clear terminal depending on OS
     screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
     c.bulletImg = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'icons', 'bullet.png')).convert_alpha()
     pygame.display.set_caption("Game Window")
