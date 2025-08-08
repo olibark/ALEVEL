@@ -11,4 +11,6 @@ movingLeft = False
 movingRight = False
 GRAVITY = 0.75
 bulletImg = None
+grenadeImage = None
 shooting = False
+grenading = False

@@ -166,6 +166,9 @@ class Player(pygame.sprite.Sprite):
                 self.direction, 
                 self)
             b.bulletGroup.add(bullet)
+            
+    def throw(self):
+        grenade = grenade.Grenade()
     
     def update(self):
         self.checkAlive()
