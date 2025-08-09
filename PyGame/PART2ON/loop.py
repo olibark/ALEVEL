@@ -18,14 +18,16 @@ def main_loop(player, enemy, screen):
     enemy.update()
     #update and draw groups
     b.bulletGroup.update(player, enemy)
+    g.grenadeGroup.update(player, enemy)
     b.bulletGroup.draw(screen)
+    g.grenadeGroup.draw(screen)
     
     if player.alive:
         if c.shooting:
             player.shoot()
         #throw grenade
         elif c.grenading:
-            grenade = g.Grenade(player.rect.centerx, player.rect.centery, player.direction, player)
+            grenade = g.Grenade(player.rect.centerx + (player.rect.size[0] * 0.5 * player.direction), player.rect.centery, player.direction, player)
             g.grenadeGroup.add(grenade)
         if player.inAir:
             player.updateAction(2)
@@ -67,7 +69,7 @@ def main_loop(player, enemy, screen):
                     player.jump = True
                     
             if event.key == pygame.K_i:
-                grenade = True
+                c.grenading = True
                 
                 
         if event.type == pygame.KEYUP:
@@ -80,7 +82,7 @@ def main_loop(player, enemy, screen):
                 c.shooting = False
     
             if event.key == pygame.K_i:
-                grenade = False
+                c.grenading = False
     pygame.display.flip()  #update the display
                 
             

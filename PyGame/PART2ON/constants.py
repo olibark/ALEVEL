@@ -1,6 +1,4 @@
-import pygame
 import os
-
 
 CLEAR = 'cls' if os.name == 'nt' else 'clear'
 WIDTH = 800

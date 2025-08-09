@@ -12,3 +12,4 @@ while c.running:
     loop.main_loop(enemy, player, screen) #main loopaa
 
 pygame.quit()
+print("clean exit")
