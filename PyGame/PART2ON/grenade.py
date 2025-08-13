@@ -1,6 +1,5 @@
 import pygame, os
 import constants as c
-import player as pl
 
 
 class Grenade(pygame.sprite.Sprite):
@@ -13,8 +12,8 @@ class Grenade(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.direction = direction
-    
-    def update(self, player):
+
+    def update(self, player, enemyGroup):
         self.vel_y += c.GRAVITY  # gravity
         dx = self.speed * self.direction
         dy = self.vel_y
@@ -31,18 +30,10 @@ class Grenade(pygame.sprite.Sprite):
         
         #countdown timer
         self.timer -= 1
-        if self.timer <= 0: 
+        if self.timer <= 0:
             self.kill()
             explosion = Explosion(self.rect.centerx, self.rect.centery, c.explosionScale)
             explosionGroup.add(explosion)
-            #do damage to anyone nearby
-            if abs(self.rect.centerx - player.rect.centerx) < c.TILESIZE * 2 and \
-                abs(self.rect.centery - player.rect.centery) < c.TILESIZE * 2:
-                    player.health -= c.EXPLOSION_DAMAGE
-            for enemy in pl.enemyGroup:
-                if abs(self.rect.centerx - enemy.rect.centerx) < c.TILESIZE * 2 and \
-                    abs(self.rect.centery - enemy.rect.centery) < c.TILESIZE * 2:
-                        enemy.health -= c.EXPLOSION_DAMAGE
                 
                 
 
@@ -62,11 +53,20 @@ class Explosion(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.timer = 50
         self.counter = 0
-        
-    def update(self):
+        self.damageApplied = False
+
+    def update(self, player, enemyGroup):
+        if not self.damageApplied:
+            if pygame.sprite.collide_rect(self, player) and player.alive:
+                player.health -= c.EXPLOSION_DAMAGE
+            for enemy in enemyGroup:
+                if pygame.sprite.collide_rect(self, enemy) and enemy.alive:
+                    enemy.health -= c.EXPLOSION_DAMAGE
+            self.damageApplied = True
+
         #update explosion animation
-        self.counter += 1 
-        if self.counter >= c.explosionSpeed: 
+        self.counter += 1
+        if self.counter >= c.explosionSpeed:
             self.counter = 0
             self.frameIndex += 1
             if self.frameIndex >= len(self.images):
@@ -74,5 +74,5 @@ class Explosion(pygame.sprite.Sprite):
             else:
                 self.image = self.images[self.frameIndex]
         
-explosionGroup = pygame.sprite.Group()        
+explosionGroup = pygame.sprite.Group()
 grenadeGroup = pygame.sprite.Group()

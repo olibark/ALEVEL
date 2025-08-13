@@ -32,11 +32,11 @@ def Init(stats = None):
         pl.Player('enemy', **stats['enemy']),
         pl.Player('enemy', **stats['enemy2'])
     ]
-    
+
     pl.enemyGroup.add(*enemies)
-        
+
     drawBG(screen, BACKGROUND)
-    return screen, enemies, player, clock
+    return screen, pl.enemyGroup, player, clock
 
 def drawBG(screen, BACKGROUND):
     screen.fill(BACKGROUND)
