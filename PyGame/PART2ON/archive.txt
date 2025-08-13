@@ -1,0 +1,3 @@
+(screen, player
+,enemy, clock) = (init.Init()[0], init.Init()[1],
+                  init.Init()[2], init.Init()[3])

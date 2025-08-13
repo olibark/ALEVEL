@@ -3,15 +3,20 @@ import os
 CLEAR = 'cls' if os.name == 'nt' else 'clear'
 WIDTH = os.environ.get('WIDTH', 800)  # Default to 800 if not set
 HEIGHT = os.environ.get('HEIGHT', 600)  # Default to 600 if not set
-
+GRAVITY = 0.75
+GROUND = 300
 FPS = 60
+
 running = True
 movingLeft = False
 movingRight = False
-GRAVITY = 0.75
 bulletImg = None
 grenadeImage = None
+explosionImage = None
 shooting = False
 grenading = False
+grenadeThrown = False
+explosionScale = 5
+explosionSpeed = 7
 
 

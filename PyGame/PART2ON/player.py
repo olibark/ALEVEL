@@ -3,7 +3,7 @@ import os
 import constants as c
 import bullet as b
 class Player(pygame.sprite.Sprite): 
-    def __init__(self, char_type, x, y, scale, speed):
+    def __init__(self, char_type, x, y, scale, speed, ammo, grenades):
         pygame.sprite.Sprite.__init__(self)
         
         BASE = os.path.dirname(os.path.abspath(__file__))
@@ -19,7 +19,10 @@ class Player(pygame.sprite.Sprite):
         self.scale = scale
         self.char_type = char_type
         self.speed = speed
+        self.ammo = ammo
+        self.start_ammo = ammo
         self.shotCooldown = 0
+        self.grenades = grenades
         self.health = 100
         self.maxHealth = self.health
         self.direction = 1
@@ -75,8 +78,8 @@ class Player(pygame.sprite.Sprite):
         dy += self.velY    
         
         #check collision with ground
-        if self.rect.bottom + dy > 300: 
-            dy = 300 - self.rect.bottom
+        if self.rect.bottom + dy > c.GROUND: 
+            dy = c.GROUND - self.rect.bottom
             self.inAir = False
             
         self.rect.x += dx
@@ -159,7 +162,7 @@ class Player(pygame.sprite.Sprite):
             
     def shoot(self):
         if self.shotCooldown <= 0:
-            self.shotCooldown = 20 # Cooldown time in frames ( 1/3 of second )
+            self.shotCooldown = 10 # Cooldown time in frames ( 1/3 of second )
             bullet = b.Bullet(
                 self.rect.centerx + (0.6 * self.rect.size[0] * self.direction),
                 self.rect.centery,
