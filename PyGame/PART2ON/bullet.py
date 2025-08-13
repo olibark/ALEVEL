@@ -1,5 +1,6 @@
 import pygame
 import constants as c
+import player as pl
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, direction, player):
@@ -19,13 +20,14 @@ class Bullet(pygame.sprite.Sprite):
         
         if pygame.sprite.spritecollide(player, bulletGroup, False):
             if player.alive:
-                    
                 player.health -= 20
                 self.kill()
-            
-        if pygame.sprite.spritecollide(enemy, bulletGroup, False):
-            if enemy.alive:
-                enemy.health -= 20
-                self.kill()
+                
+        for enemy in pl.enemyGroup:     
+            if pygame.sprite.spritecollide(enemy, bulletGroup, False):
+                if enemy.alive:
+                    enemy.health -= 20
+                    self.kill()
+                    
 #create a group for bullets            
 bulletGroup = pygame.sprite.Group()

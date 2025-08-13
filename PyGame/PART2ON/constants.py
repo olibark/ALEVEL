@@ -6,6 +6,9 @@ HEIGHT = os.environ.get('HEIGHT', 600)  # Default to 600 if not set
 GRAVITY = 0.75
 GROUND = 300
 FPS = 60
+TILESIZE = 40
+EXPLOSION_DAMAGE = 50
+WEAPON_COOLDOWN = 0.5 #seconds
 
 running = True
 movingLeft = False
@@ -16,7 +19,5 @@ explosionImage = None
 shooting = False
 grenading = False
 grenadeThrown = False
-explosionScale = 5
+explosionScale = 6
 explosionSpeed = 7
-
-

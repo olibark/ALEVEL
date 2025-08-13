@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = speed
         self.ammo = ammo
         self.start_ammo = ammo
-        self.shotCooldown = 0
+        self.shotCooldown = c.WEAPON_COOLDOWN
         self.grenades = grenades
         self.health = 100
         self.maxHealth = self.health
@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite):
                 
         self.image = self.animationList[self.action][self.frameIndex]
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
+        self.rect.midbottom = (x, y)
         
     def move(self, screen):
         #reset movement variables
@@ -186,3 +186,6 @@ class Player(pygame.sprite.Sprite):
             self.health = 0
             self.speed = 0
             self.updateAction(3) #3 = death
+            
+            
+enemyGroup = pygame.sprite.Group()

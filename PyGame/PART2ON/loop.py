@@ -18,7 +18,7 @@ def main_loop(player, enemy, screen):
     enemy.update()
     #update and draw groups
     b.bulletGroup.update(player, enemy)
-    g.grenadeGroup.update()
+    g.grenadeGroup.update(player)
     g.explosionGroup.update()
     b.bulletGroup.draw(screen)
     g.grenadeGroup.draw(screen)
@@ -42,7 +42,7 @@ def main_loop(player, enemy, screen):
         else: 
             player.updateAction(player.IDLE)#0 = idle
         player.move(screen)
-        
+    enemy.move(screen)
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT: 
