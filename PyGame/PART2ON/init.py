@@ -7,7 +7,8 @@ GREEN = (20, 255, 20)
 
 STATS = {
     'player': {'x': 100, 'y': c.GROUND, 'scale': 5, 'speed': 6, 'ammo': 10, 'grenades': 10},
-    'enemy': {'x': 500, 'y': c.GROUND, 'scale': 5, 'speed': 5, 'ammo': 10, 'grenades': 0}
+    'enemy': {'x': 500, 'y': c.GROUND, 'scale': 5, 'speed': 5, 'ammo': 10, 'grenades': 0},
+    'enemy2': {'x': 600, 'y': c.GROUND, 'scale': 5, 'speed': 5, 'ammo': 10, 'grenades': 0}
 }
 
 def Init(stats = None):
@@ -26,11 +27,16 @@ def Init(stats = None):
     
     #(char_type, x, y, scale, speed, ammo, grenades) 
     player = pl.Player('player', **stats['player'])
-    enemy = pl.Player('enemy', **stats['enemy'])
-    pl.enemyGroup.add(enemy)
     
+    enemies = [
+        pl.Player('enemy', **stats['enemy']),
+        pl.Player('enemy', **stats['enemy2'])
+    ]
+    
+    pl.enemyGroup.add(*enemies)
+        
     drawBG(screen, BACKGROUND)
-    return screen, enemy, player, clock
+    return screen, enemies, player, clock
 
 def drawBG(screen, BACKGROUND):
     screen.fill(BACKGROUND)

@@ -11,7 +11,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.direction = direction
 
-    def update(self, player, enemy):
+    def update(self, player, enemyGroup):
         self.rect.x += (self.speed * self.direction)
         
         # Remove bullet if it goes off screen
@@ -23,7 +23,7 @@ class Bullet(pygame.sprite.Sprite):
                 player.health -= 20
                 self.kill()
                 
-        for enemy in pl.enemyGroup:     
+        for enemy in enemyGroup:     
             if pygame.sprite.spritecollide(enemy, bulletGroup, False):
                 if enemy.alive:
                     enemy.health -= 20

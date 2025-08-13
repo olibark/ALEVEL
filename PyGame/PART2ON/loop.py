@@ -2,22 +2,27 @@ import pygame, init
 import constants as c
 import bullet as b
 import grenade as g
+import player as pl
 
-def main_loop(player, enemy, screen):
+def main_loop(player, enemies, screen):
     
     init.drawBG(screen, init.BACKGROUND)  # draw background
     #player and enemy draw order
-    if player.scale >= enemy.scale:
-        enemy.draw(screen)
+    maxEnemyScale = max((enemy.scale for enemy in pl.enemyGroup), default = 0)
+    if len(enemies) > 0 and player.scale >= maxEnemyScale:
+        for enemy in pl.enemyGroup:
+            enemy.draw(screen)
         player.draw(screen)
     else:
         player.draw(screen)
-        enemy.draw(screen)
-    
+        for enemy in pl.enemyGroup:
+            enemy.draw(screen)
+
     player.update()
-    enemy.update()
+    for enemy in pl.enemyGroup:
+        enemy.update()
     #update and draw groups
-    b.bulletGroup.update(player, enemy)
+    b.bulletGroup.update(player, pl.enemyGroup)
     g.grenadeGroup.update(player)
     g.explosionGroup.update()
     b.bulletGroup.draw(screen)
@@ -42,7 +47,10 @@ def main_loop(player, enemy, screen):
         else: 
             player.updateAction(player.IDLE)#0 = idle
         player.move(screen)
-    enemy.move(screen)
+    
+    for enemy in pl.enemyGroup:
+        enemy.move(screen)
+    
     for event in pygame.event.get():
         
         if event.type == pygame.QUIT: 

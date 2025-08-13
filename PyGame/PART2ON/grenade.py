@@ -33,7 +33,7 @@ class Grenade(pygame.sprite.Sprite):
         self.timer -= 1
         if self.timer <= 0: 
             self.kill()
-            explosion = Explosion(self.rect.x, self.rect.y, c.explosionScale)
+            explosion = Explosion(self.rect.centerx, self.rect.centery, c.explosionScale)
             explosionGroup.add(explosion)
             #do damage to anyone nearby
             if abs(self.rect.centerx - player.rect.centerx) < c.TILESIZE * 2 and \
