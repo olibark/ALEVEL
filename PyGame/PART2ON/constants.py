@@ -12,12 +12,23 @@ WEAPON_COOLDOWN = 0.5 #seconds
 
 running = True
 movingLeft = False
+
 movingRight = False
 bulletImg = None
 grenadeImage = None
 explosionImage = None
+ammoBoxImage = None
+grenadeBoxImage = None
+healthBoxImage = None
+
 shooting = False
 grenading = False
 grenadeThrown = False
-explosionScale = 6
+explosionScale = 4
 explosionSpeed = 7
+
+itemBoxes = {
+    'ammo': ammoBoxImage, 
+    'grenade': grenadeBoxImage,
+    'health': healthBoxImage
+}

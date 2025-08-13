@@ -2,6 +2,7 @@ import pygame, init
 import constants as c
 import bullet as b
 import grenade as g
+import items as it
 
 def main_loop(player, enemyGroup, screen):
     init.drawBG(screen, init.BACKGROUND)  # draw background
@@ -25,10 +26,12 @@ def main_loop(player, enemyGroup, screen):
     b.bulletGroup.update(player, enemyGroup)
     g.grenadeGroup.update(player, enemyGroup)
     g.explosionGroup.update(player, enemyGroup)  # <-- keep args to deliver damage once
-
+    it.itemBoxGroup.update(player)
+    #draw
     b.bulletGroup.draw(screen)
     g.grenadeGroup.draw(screen)
     g.explosionGroup.draw(screen)
+    it.itemBoxGroup.draw(screen)
 
     if player.alive:
         if c.shooting:

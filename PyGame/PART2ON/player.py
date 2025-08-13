@@ -93,6 +93,8 @@ class Player(pygame.sprite.Sprite):
     
     def draw(self, screen ):
         screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
+        #draw rect
+        pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
     
     def setScale(self, scale):
         
@@ -161,7 +163,7 @@ class Player(pygame.sprite.Sprite):
             self.updateTime = pygame.time.get_ticks()
             
     def shoot(self):
-        if self.shotCooldown <= 0:
+        if self.shotCooldown <= 0 and self.ammo > 10:
             self.shotCooldown = 10 # Cooldown time in frames ( 1/3 of second )
             bullet = b.Bullet(
                 self.rect.centerx + (0.6 * self.rect.size[0] * self.direction),
@@ -169,6 +171,8 @@ class Player(pygame.sprite.Sprite):
                 self.direction, 
                 self)
             b.bulletGroup.add(bullet)
+            self.ammo -= 1 
+            print(f"Ammo left: {self.ammo}")
     
     def update(self):
         self.checkAlive()
