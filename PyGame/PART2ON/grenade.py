@@ -1,6 +1,5 @@
 import pygame, os
 import constants as c
-import player as pl
 
 
 class Grenade(pygame.sprite.Sprite):
@@ -13,8 +12,8 @@ class Grenade(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
         self.direction = direction
-    
-    def update(self, player):
+
+    def update(self, player, enemyGroup):
         self.vel_y += c.GRAVITY  # gravity
         dx = self.speed * self.direction
         dy = self.vel_y
@@ -39,7 +38,7 @@ class Grenade(pygame.sprite.Sprite):
             if abs(self.rect.centerx - player.rect.centerx) < c.TILESIZE * 2 and \
                 abs(self.rect.centery - player.rect.centery) < c.TILESIZE * 2:
                     player.health -= c.EXPLOSION_DAMAGE
-            for enemy in pl.enemyGroup:
+            for enemy in enemyGroup:
                 if abs(self.rect.centerx - enemy.rect.centerx) < c.TILESIZE * 2 and \
                     abs(self.rect.centery - enemy.rect.centery) < c.TILESIZE * 2:
                         enemy.health -= c.EXPLOSION_DAMAGE
