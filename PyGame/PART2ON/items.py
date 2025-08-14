@@ -12,12 +12,26 @@ class Item(pygame.sprite.Sprite):
     def update(self, player):
         if pygame.sprite.collide_rect(self, player):
             #check box
-            if self.itemType == 'health':
-                player.health +=25
+            if self.itemType == 'health' and player.health < player.maxHealth:
+                healthDiff = player.maxHealth - player.health
+                if healthDiff >= 50:
+                    player.health += 50
+                else:
+                    player.health += healthDiff
+                
             elif self.itemType == 'grenade':
-                player.grenades += 3
+                grenadeDiff = player.maxGrenades - player.grenades
+                if grenadeDiff >= 3:
+                    player.grenades += 3
+                else:
+                    player.grenades += grenadeDiff 
+                    
             elif self.itemType == 'ammo':
-                player.ammo += 10
+                ammoDiff = player.maxAmmo - player.ammo
+                if ammoDiff >= 15:
+                    player.ammo += 15
+                else:
+                    player.ammo += ammoDiff
             
             
             

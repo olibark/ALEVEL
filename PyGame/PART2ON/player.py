@@ -9,24 +9,29 @@ class Player(pygame.sprite.Sprite):
         BASE = os.path.dirname(os.path.abspath(__file__))
         
         self.alive = True
+        self.health = 100
+        
+        self.speed = speed
         self.char_type = char_type
-        self.velY = 0
         self.movingLeft = False
         self.movingRight = False
+        self.jump = False
+        self.inAir = True
         self.RUNNING = 1
         self.IDLE = 0
-        self.inAir = True
+        self.velY = 0
         self.scale = scale
-        self.char_type = char_type
-        self.speed = speed
+        self.direction = 1
+        
+        self.maxHealth = c.MAX_HEALTH
+        self.maxGrenades = c.MAX_GRENADES
+        self.maxAmmo = c.MAX_AMMO
+        self.shotCooldown = c.WEAPON_COOLDOWN
+        
+        self.grenades = grenades
         self.ammo = ammo
         self.start_ammo = ammo
-        self.shotCooldown = c.WEAPON_COOLDOWN
-        self.grenades = grenades
-        self.health = 100
-        self.maxHealth = self.health
-        self.direction = 1
-        self.jump = False
+        
         self.flip = False
         self.animationList = []
         self.frameIndex = 0

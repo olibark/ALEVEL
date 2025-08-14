@@ -32,3 +32,7 @@ itemBoxes = {
     'grenade': grenadeBoxImage,
     'health': healthBoxImage
 }
+
+MAX_HEALTH = 150
+MAX_AMMO = 40
+MAX_GRENADES = 10
