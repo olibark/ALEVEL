@@ -19,14 +19,14 @@ class Item(pygame.sprite.Sprite):
                 else:
                     player.health += healthDiff
                 
-            elif self.itemType == 'grenade':
+            elif self.itemType == 'grenade' and player.grenades < player.maxGrenades:
                 grenadeDiff = player.maxGrenades - player.grenades
                 if grenadeDiff >= 3:
                     player.grenades += 3
                 else:
                     player.grenades += grenadeDiff 
                     
-            elif self.itemType == 'ammo':
+            elif self.itemType == 'ammo' and player.ammo < player.maxAmmo:
                 ammoDiff = player.maxAmmo - player.ammo
                 if ammoDiff >= 15:
                     player.ammo += 15
