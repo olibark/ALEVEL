@@ -1,4 +1,4 @@
-import os, pygame
+import os
 
 CLEAR = 'cls' if os.name == 'nt' else 'clear'
 WIDTH = os.environ.get('WIDTH', 800)  # Default to 800 if not set
@@ -11,6 +11,7 @@ EXPLOSION_DAMAGE = 50
 WEAPON_COOLDOWN = 0.5 #seconds
 BACKGROUND = (0, 0, 0)
 GREEN = (20, 255, 20)
+WHITE = (255, 255, 255)
 
 # Font placeholder; initialized after pygame.init()
 textFont = None

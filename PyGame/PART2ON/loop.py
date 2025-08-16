@@ -8,7 +8,7 @@ import background as bg
 def main_loop(player, enemyGroup, screen):
     
     bg.drawBG(screen, c.BACKGROUND)  # draw background
-    bg.drawText(f"Health: {player.health}", c.textFont, (255, 255, 255), screen, 10, 10)
+    bg.drawBars(player, enemyGroup, screen)
     # player and enemy draw order
     maxEnemyScale = max((enemy.scale for enemy in enemyGroup), default=0)
     if len(enemyGroup) > 0 and player.scale >= maxEnemyScale:
