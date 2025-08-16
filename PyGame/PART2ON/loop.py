@@ -5,7 +5,7 @@ import grenade as g
 import items as it
 import background as bg
 
-def main_loop(player, enemyGroup, screen):
+def main_loop(player, enemyGroup, screen, healthBar):
     
     bg.drawBG(screen, c.BACKGROUND)  # draw background
     # player and enemy draw order
@@ -26,7 +26,7 @@ def main_loop(player, enemyGroup, screen):
     # update and draw groups
     b.bulletGroup.update(player, enemyGroup)
     g.grenadeGroup.update(player, enemyGroup)
-    g.explosionGroup.update(player, enemyGroup)  # <-- keep args to deliver damage once
+    g.explosionGroup.update(player, enemyGroup)
     it.itemBoxGroup.update(player)
     #draw
     b.bulletGroup.draw(screen)
@@ -34,7 +34,7 @@ def main_loop(player, enemyGroup, screen):
     g.explosionGroup.draw(screen)
     it.itemBoxGroup.draw(screen)
 
-    bg.drawBars(player, screen)
+    bg.drawBars(player, screen, healthBar)
     
     if player.alive:
         if c.shooting:

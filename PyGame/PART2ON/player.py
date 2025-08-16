@@ -23,6 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.scale = scale
         self.direction = 1
         
+        self.extraHealth = False
         self.maxHealth = c.MAX_HEALTH
         self.maxGrenades = c.MAX_GRENADES
         self.maxAmmo = c.MAX_AMMO
@@ -177,7 +178,6 @@ class Player(pygame.sprite.Sprite):
                 self)
             b.bulletGroup.add(bullet)
             self.ammo -= 1 
-            print(f"Ammo left: {self.ammo}")
     
     def update(self):
         self.checkAlive()
@@ -192,6 +192,8 @@ class Player(pygame.sprite.Sprite):
             self.health = 0
             self.speed = 0
             self.updateAction(3) #3 = death
+        if self.health > 100:
+            self.extraHealth = True
             
             
 enemyGroup = pygame.sprite.Group()

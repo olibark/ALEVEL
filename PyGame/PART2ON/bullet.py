@@ -5,7 +5,7 @@ import player as pl
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, direction, player):
         pygame.sprite.Sprite.__init__(self)
-        self.image = c.bulletImg
+        self.image = c.bulletImage
         self.rect = self.image.get_rect()
         self.speed = 10
         self.rect.center = (x, y)

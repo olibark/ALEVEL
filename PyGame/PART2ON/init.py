@@ -19,7 +19,7 @@ def Init(stats = None):
     os.system(c.CLEAR)  # Clear terminal depending on OS
     screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
     
-    c.bulletImg = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'icons', 'bullet.png')).convert_alpha()
+    c.bulletImage = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'icons', 'bullet.png')).convert_alpha()
     c.grenadeImage = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'icons', 'grenade.png')).convert_alpha()
     c.explosionImage = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'explosion', 'exp1.png')).convert_alpha()
     c.ammoBoxImage = pygame.image.load(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'img', 'icons', 'ammo_box.png')).convert_alpha()
@@ -37,14 +37,13 @@ def Init(stats = None):
     
     #(char_type, x, y, scale, speed, ammo, grenades) 
     player = pl.Player('player', **stats['player'])
+    healthBar = bg.DrawHealthBar(10, 10, player.health, player.maxHealth, player.extraHealth, screen)
     
-    itemBox = it.Item('health', 100, c.GROUND - 40, player)
+    itemBox = it.Item('health', 400, c.GROUND - 40, player)
     it.itemBoxGroup.add(itemBox)
     itemBox = it.Item('ammo', 200, c.GROUND - 40, player)
     it.itemBoxGroup.add(itemBox)
     itemBox = it.Item('grenade', 300, c.GROUND - 40, player)
-    it.itemBoxGroup.add(itemBox)
-    itemBox = it.Item('health', 400, c.GROUND - 40, player)
     it.itemBoxGroup.add(itemBox)
     
     enemies = [
@@ -56,5 +55,5 @@ def Init(stats = None):
 
     bg.drawBG(screen, c.BACKGROUND)
     
-    return screen, pl.enemyGroup, player, clock
+    return screen, pl.enemyGroup, player, clock, healthBar
 
