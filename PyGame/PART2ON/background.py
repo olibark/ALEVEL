@@ -23,6 +23,7 @@ class DrawHealthBar:
         self.health = health
 
         # draw background representing total possible health
+        pygame.draw.rect(screen, c.BLACK, (self.x - c.BORDER, self.y - c.BORDER, self.maxHealth + c.BORDER * 2, 20 + c.BORDER * 2))
         pygame.draw.rect(screen, c.RED, (self.x, self.y, self.maxHealth - 50, 20))
 
         # draw normal health in green (capped at 100)

@@ -11,12 +11,13 @@ FPS = 60
 TILESIZE = 40
 EXPLOSION_DAMAGE = 50
 WEAPON_COOLDOWN = 10#miliseconds
-BACKGROUND = (0, 0, 0)
+BACKGROUND = (20, 40, 15)
 GREEN = (20, 255, 20)
 WHITE = (255, 255, 255)
 RED = (230, 20, 20)
 YELLOW = (255, 255, 0)
-
+BLACK = (0, 0, 0)
+BORDER = 1
 # Font placeholder; initialized after pygame.init()
 textFont = None
 
