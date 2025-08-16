@@ -187,13 +187,15 @@ class Player(pygame.sprite.Sprite):
             self.shotCooldown -= 1
             
     def checkAlive(self):
-        if self.health <= 0: 
+        if self.health <= 0:
             self.alive = False
             self.health = 0
             self.speed = 0
             self.updateAction(3) #3 = death
         if self.health > 100:
             self.extraHealth = True
+        else:
+            self.extraHealth = False
             
             
 enemyGroup = pygame.sprite.Group()

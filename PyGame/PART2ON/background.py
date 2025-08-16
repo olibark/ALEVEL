@@ -17,15 +17,22 @@ class DrawHealthBar:
         self.health = health
         self.maxHealth = maxHealth
         self.extraHealth = extraHealth
-    def draw(self, health, player, screen):
 
+    def draw(self, health, player, screen):
+        # update current health
         self.health = health
-        if not player.extraHealth:
-            ratio = self.health / self.maxHealth - 50
-            pygame.draw.rect(screen, c.RED, (self.x, self.y, 150, 20))
-            pygame.draw.rect(screen, c.GREEN, (self.x, self.y, 150 * ratio, 20))
-        elif player.extraHealth:
-            pygame.draw.rect(screen, c.YELLOW, (self.x + 20, self.y, 170, 20))
+
+        # draw background representing total possible health
+        pygame.draw.rect(screen, c.RED, (self.x, self.y, self.maxHealth, 20))
+
+        # draw normal health in green (capped at 100)
+        normal_health = min(self.health, 100)
+        pygame.draw.rect(screen, c.GREEN, (self.x, self.y, normal_health, 20))
+
+        # draw extra health in yellow appended to the bar
+        extra_health = max(0, self.health - 100)
+        if extra_health > 0:
+            pygame.draw.rect(screen, c.YELLOW, (self.x + 100, self.y, extra_health, 20))
 
 def drawBars(player, screen, healthBar):
     healthBar.draw(player.health, player, screen)
