@@ -170,7 +170,7 @@ class Player(pygame.sprite.Sprite):
             
     def shoot(self):
         if self.shotCooldown <= 0 and self.ammo > 0:
-            self.shotCooldown = 10 # Cooldown time in frames ( 1/3 of second )
+            self.shotCooldown = c.WEAPON_COOLDOWN
             bullet = b.Bullet(
                 self.rect.centerx + (0.6 * self.rect.size[0] * self.direction),
                 self.rect.centery,
