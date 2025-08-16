@@ -12,7 +12,8 @@ WEAPON_COOLDOWN = 0.5 #seconds
 BACKGROUND = (0, 0, 0)
 GREEN = (20, 255, 20)
 
-textFont = pygame.font.SysFont('Futura', 30)
+# Font placeholder; initialized after pygame.init()
+textFont = None
 
 running = True
 movingLeft = False
