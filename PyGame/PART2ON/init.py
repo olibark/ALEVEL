@@ -5,9 +5,9 @@ import items as it
 import background as bg
 
 STATS = {
-    'player': {'x': 100, 'y': c.GROUND, 'scale': 5, 'speed': 6, 'ammo': 10, 'grenades': 3},
-    'enemy': {'x': 500, 'y': c.GROUND, 'scale': 5, 'speed': 5, 'ammo': 10, 'grenades': 0},
-    'enemy2': {'x': 600, 'y': c.GROUND, 'scale': 5, 'speed': 5, 'ammo': 10, 'grenades': 0}
+    'player': {'x': 100, 'y': c.GROUND, 'scale': 1.65, 'speed': 6, 'ammo': 10, 'grenades': 3},
+    'enemy': {'x': 500, 'y': c.GROUND, 'scale': 1.65, 'speed': 5, 'ammo': 10, 'grenades': 0},
+    'enemy2': {'x': 600, 'y': c.GROUND, 'scale': 1.65, 'speed': 5, 'ammo': 10, 'grenades': 0}
 }
 
 def Init(stats = None):

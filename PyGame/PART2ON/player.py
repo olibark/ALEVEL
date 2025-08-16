@@ -20,6 +20,7 @@ class Player(pygame.sprite.Sprite):
         self.RUNNING = 1
         self.IDLE = 0
         self.velY = 0
+        self.startScale = scale
         self.scale = scale
         self.direction = 1
         
@@ -176,7 +177,7 @@ class Player(pygame.sprite.Sprite):
                 self.rect.centery,
                 self.direction, 
                 self)
-            b.bulletGroup.add(bullet)
+            b.playerBulletGroup.add(bullet)
             self.ammo -= 1 
     
     def update(self):

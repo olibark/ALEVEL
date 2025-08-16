@@ -24,12 +24,14 @@ def main_loop(player, enemyGroup, screen, healthBar):
         enemy.update()
 
     # update and draw groups
-    b.bulletGroup.update(player, enemyGroup)
+    b.playerBulletGroup.update(player, enemyGroup)
+    b.enemyBulletGroup.update(player, enemyGroup)
     g.grenadeGroup.update(player, enemyGroup)
     g.explosionGroup.update(player, enemyGroup)
     it.itemBoxGroup.update(player)
     #draw
-    b.bulletGroup.draw(screen)
+    b.playerBulletGroup.draw(screen)
+    b.enemyBulletGroup.draw(screen)
     g.grenadeGroup.draw(screen)
     g.explosionGroup.draw(screen)
     it.itemBoxGroup.draw(screen)
@@ -77,16 +79,16 @@ def main_loop(player, enemyGroup, screen, healthBar):
                 c.shooting = True
 
             if event.key == pygame.K_LSHIFT:
-                if player.scale == 5:
-                    player.setScale(3)
+                if player.scale == player.startScale:
+                    player.setScale(player.startScale * 0.75)
                 else:
-                    player.setScale(5)
+                    player.setScale(player.startScale)
 
             if event.key == pygame.K_LCTRL:
-                if player.scale == 5:
-                    player.setScale(7)
+                if player.scale == player.startScale:
+                    player.setScale(player.startScale * 1.75)
                 else:
-                    player.setScale(5)
+                    player.setScale(player.startScale)
 
             if event.key == pygame.K_SPACE and player.alive:
                 if not player.jump:

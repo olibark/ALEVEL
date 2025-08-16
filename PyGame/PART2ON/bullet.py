@@ -7,7 +7,7 @@ class Bullet(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         self.image = c.bulletImage
         self.rect = self.image.get_rect()
-        self.speed = 10
+        self.speed = c.BULLET_SPEED
         self.rect.center = (x, y)
         self.direction = direction
 
@@ -18,16 +18,17 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.right < 0 or self.rect.left > c.WIDTH:
             self.kill()
         
-        if pygame.sprite.spritecollide(player, bulletGroup, False):
+        if pygame.sprite.spritecollide(player, enemyBulletGroup, False):
             if player.alive:
                 player.health -= 20
                 self.kill()
                 
         for enemy in enemyGroup:     
-            if pygame.sprite.spritecollide(enemy, bulletGroup, False):
+            if pygame.sprite.spritecollide(enemy, playerBulletGroup, False):
                 if enemy.alive:
                     enemy.health -= 20
                     self.kill()
                     
 #create a group for bullets            
-bulletGroup = pygame.sprite.Group()
+playerBulletGroup = pygame.sprite.Group()
+enemyBulletGroup = pygame.sprite.Group()

@@ -35,6 +35,8 @@ healthBoxImage = None
 shooting = False
 grenading = False
 grenadeThrown = False
+
+BULLET_SPEED = 20
 explosionScale = 4
 explosionSpeed = 7
 
