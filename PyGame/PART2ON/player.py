@@ -1,5 +1,4 @@
-import pygame
-import os
+import pygame, random, os
 import constants as c
 import bullet as b
 class Player(pygame.sprite.Sprite): 
@@ -22,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.velY = 0
         self.startScale = scale
         self.scale = scale
-        self.direction = 1
+        self.direction = 1 if char_type == 'player' else random.choice([-1, 1])
         
         self.extraHealth = False
         self.maxHealth = c.MAX_HEALTH
@@ -98,7 +97,7 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right > screen.get_width():
             self.rect.right = screen.get_width()
     
-    def draw(self, screen ):
+    def draw(self, screen):
         screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
         #draw rect
         pygame.draw.rect(screen, (255, 0, 0), self.rect, 2)
@@ -198,5 +197,12 @@ class Player(pygame.sprite.Sprite):
         else:
             self.extraHealth = False
             
-            
+    def ai(self, player, screen):
+        if self.alive and player.alive:
+            if self.direction == 1:
+                aiMovingRight = True
+            else: 
+                aiMovingRight = False
+            aiMovingLeft = not aiMovingRight #opposites
+            self.move(screen)
 enemyGroup = pygame.sprite.Group()

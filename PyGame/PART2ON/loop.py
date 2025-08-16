@@ -22,6 +22,7 @@ def main_loop(player, enemyGroup, screen, healthBar):
     player.update()
     for enemy in enemyGroup:
         enemy.update()
+        enemy.ai(player, screen)
 
     # update and draw groups
     b.playerBulletGroup.update(player, enemyGroup)
