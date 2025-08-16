@@ -2,9 +2,7 @@ import pygame, os
 import constants as c
 import player as pl
 import items as it
-
-BACKGROUND = (0, 0, 0)
-GREEN = (20, 255, 20)
+import background as bg
 
 STATS = {
     'player': {'x': 100, 'y': c.GROUND, 'scale': 5, 'speed': 6, 'ammo': 10, 'grenades': 10},
@@ -32,7 +30,6 @@ def Init(stats = None):
         'health': c.healthBoxImage,
     }
     
-    
     pygame.display.set_caption("Shooter")
     print(f"Game initialized with dimensions: {c.WIDTH}x{c.HEIGHT}")
     
@@ -45,6 +42,8 @@ def Init(stats = None):
     it.itemBoxGroup.add(itemBox)
     itemBox = it.Item('grenade', 300, c.GROUND - 40, player)
     it.itemBoxGroup.add(itemBox)
+    itemBox = it.Item('health', 400, c.GROUND - 40, player)
+    it.itemBoxGroup.add(itemBox)
     
     enemies = [
         pl.Player('enemy', **stats['enemy']),
@@ -53,9 +52,7 @@ def Init(stats = None):
 
     pl.enemyGroup.add(*enemies)
 
-    drawBG(screen, BACKGROUND)
+    bg.drawBG(screen, c.BACKGROUND)
+    
     return screen, pl.enemyGroup, player, clock
 
-def drawBG(screen, BACKGROUND):
-    screen.fill(BACKGROUND)
-    pygame.draw.line(screen, GREEN, (0, c.GROUND), (c.WIDTH, c.GROUND))

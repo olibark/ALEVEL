@@ -18,7 +18,7 @@ class Item(pygame.sprite.Sprite):
                     player.health += 50
                 else:
                     player.health += healthDiff
-                
+
             elif self.itemType == 'grenade' and player.grenades < player.maxGrenades:
                 grenadeDiff = player.maxGrenades - player.grenades
                 if grenadeDiff >= 3:
@@ -32,7 +32,6 @@ class Item(pygame.sprite.Sprite):
                     player.ammo += 15
                 else:
                     player.ammo += ammoDiff
-            
-            
+            self.kill()
             
 itemBoxGroup = pygame.sprite.Group() 

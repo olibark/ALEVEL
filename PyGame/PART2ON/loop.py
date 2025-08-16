@@ -1,12 +1,14 @@
-import pygame, init
+import pygame
 import constants as c
 import bullet as b
 import grenade as g
 import items as it
+import background as bg
 
 def main_loop(player, enemyGroup, screen):
-    init.drawBG(screen, init.BACKGROUND)  # draw background
-
+    
+    bg.drawBG(screen, c.BACKGROUND)  # draw background
+    bg.drawText(f"Health: {player.health}", c.textFont, (255, 255, 255), screen, 10, 10)
     # player and enemy draw order
     maxEnemyScale = max((enemy.scale for enemy in enemyGroup), default=0)
     if len(enemyGroup) > 0 and player.scale >= maxEnemyScale:
