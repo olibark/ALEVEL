@@ -14,6 +14,8 @@ def Init(stats = None):
     stats = stats or STATS
     pygame.init()
     clock = pygame.time.Clock()
+    # Initialize fonts now that pygame is ready
+    c.textFont = pygame.font.SysFont('Futura', 30)
     os.system(c.CLEAR)  # Clear terminal depending on OS
     screen = pygame.display.set_mode((c.WIDTH, c.HEIGHT))
     
