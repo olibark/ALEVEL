@@ -8,7 +8,6 @@ import background as bg
 def main_loop(player, enemyGroup, screen):
     
     bg.drawBG(screen, c.BACKGROUND)  # draw background
-    bg.drawBars(player, enemyGroup, screen)
     # player and enemy draw order
     maxEnemyScale = max((enemy.scale for enemy in enemyGroup), default=0)
     if len(enemyGroup) > 0 and player.scale >= maxEnemyScale:
@@ -35,6 +34,8 @@ def main_loop(player, enemyGroup, screen):
     g.explosionGroup.draw(screen)
     it.itemBoxGroup.draw(screen)
 
+    bg.drawBars(player, screen)
+    
     if player.alive:
         if c.shooting:
             player.shoot()
@@ -49,7 +50,7 @@ def main_loop(player, enemyGroup, screen):
             g.grenadeGroup.add(grenade)
             c.grenadeThrown = True
             player.grenades -= 1
-            print(player.grenades)
+            
         if player.inAir:
             player.updateAction(2)
         elif player.movingLeft or player.movingRight:
